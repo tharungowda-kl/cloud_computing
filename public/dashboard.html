@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Dashboard - GraminSeva</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Academic Demonstration Banner -->
+  <div class="demo-banner">
+    🌾 <strong>GraminSeva Citizen Dashboard:</strong> Dynamic user session loaded from JWT & REST API.
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        </div>
+        <div>
+          <span>GraminSeva</span>
+          <span class="brand-subtitle">Rural Digital Platform</span>
+        </div>
+      </a>
+
+      <div class="nav-actions" id="nav-auth-actions">
+        <!-- Auth injected by app.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar & Dashboard Layout -->
+  <div class="dashboard-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-profile">
+        <div class="user-avatar" id="dash-avatar">U</div>
+        <div>
+          <div class="sidebar-user-name" id="dash-user-name">Loading...</div>
+          <div class="sidebar-user-role" id="dash-user-role">Rural Citizen</div>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-heading">Navigation</li>
+        <li class="sidebar-item active">
+          <a href="dashboard.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Dashboard Overview
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="schemes.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            Govt Schemes
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="scholarships.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            Scholarships
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="agriculture.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20h10"></path><path d="M10 20c0-5 3-7 5-14"></path><path d="M4 15c4 0 7-3 7-7"></path></svg>
+            Agriculture Guides
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="weather.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+            Weather Updates
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="documents.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline></svg>
+            Document Locker
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="notifications.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            Notifications
+            <span class="sidebar-badge notif-badge-count" style="display: none;">0</span>
+          </a>
+        </li>
+
+        <li class="sidebar-heading" id="admin-menu-heading" style="display: none;">Administration</li>
+        <li class="sidebar-item" id="admin-menu-link" style="display: none;">
+          <a href="admin.html" style="color: var(--secondary);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            Admin Panel
+          </a>
+        </li>
+
+        <li class="sidebar-heading">Account</li>
+        <li class="sidebar-item">
+          <a href="javascript:void(0)" onclick="logout()" style="color: var(--accent-red);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            Log Out
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Dashboard Workspace -->
+    <main class="dashboard-main">
+      <!-- Welcome Header -->
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="badge badge-green" style="margin-bottom: 8px;">Active Citizen Portal</span>
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-main);" id="dash-greeting">
+            Welcome to GraminSeva!
+          </h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;" id="dash-district-sub">
+            District: Mandya Rural | Connected to Central Services
+          </p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="documents.html" class="btn btn-outline-primary btn-sm">
+            + Upload Document
+          </a>
+          <a href="schemes.html" class="btn btn-primary btn-sm">
+            Browse Schemes →
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick KPI Stat Counters -->
+      <div class="stats-overview-grid">
+        <div class="stat-widget">
+          <div class="stat-widget-icon icon-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+          </div>
+          <div>
+            <div class="stat-widget-num" id="kpi-schemes-count">6+</div>
+            <div class="stat-widget-label">Available Schemes</div>
+          </div>
+        </div>
+
+        <div class="stat-widget">
+          <div class="stat-widget-icon icon-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path></svg>
+          </div>
+          <div>
+            <div class="stat-widget-num" id="kpi-scholarships-count">5+</div>
+            <div class="stat-widget-label">Student Scholarships</div>
+          </div>
+        </div>
+
+        <div class="stat-widget">
+          <div class="stat-widget-icon icon-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg>
+          </div>
+          <div>
+            <div class="stat-widget-num" id="kpi-docs-count">0</div>
+            <div class="stat-widget-label">My Uploaded Documents</div>
+          </div>
+        </div>
+
+        <div class="stat-widget">
+          <div class="stat-widget-icon icon-amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path></svg>
+          </div>
+          <div>
+            <div class="stat-widget-num" id="kpi-alerts-count">4</div>
+            <div class="stat-widget-label">Unread Alerts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Services Grid -->
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">
+        Quick Access Services
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 30px;">
+        <a href="schemes.html" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); color: var(--text-main);">
+          <div class="icon-green" style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🏛️</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Govt Schemes</div>
+            <div style="font-size: 0.8rem; color: var(--text-light);">Apply for Subsidies</div>
+          </div>
+        </a>
+
+        <a href="scholarships.html" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); color: var(--text-main);">
+          <div class="icon-blue" style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🎓</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Scholarships</div>
+            <div style="font-size: 0.8rem; color: var(--text-light);">Grants & Merit Aid</div>
+          </div>
+        </a>
+
+        <a href="agriculture.html" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); color: var(--text-main);">
+          <div class="icon-amber" style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🌾</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Agriculture Guide</div>
+            <div style="font-size: 0.8rem; color: var(--text-light);">Crops & Fertilizers</div>
+          </div>
+        </a>
+
+        <a href="weather.html" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); color: var(--text-main);">
+          <div class="icon-blue" style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🌤️</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Weather Forecast</div>
+            <div style="font-size: 0.8rem; color: var(--text-light);">Agro-Advisories</div>
+          </div>
+        </a>
+
+        <a href="documents.html" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); color: var(--text-main);">
+          <div class="icon-purple" style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">📁</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Document Locker</div>
+            <div style="font-size: 0.8rem; color: var(--text-light);">Aadhaar & Land RTC</div>
+          </div>
+        </a>
+
+        <a href="notifications.html" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); color: var(--text-main);">
+          <div class="icon-green" style="width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🔔</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Announcements</div>
+            <div style="font-size: 0.8rem; color: var(--text-light);">View Alerts</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Split Layout: Recent Notifications & Weather Preview -->
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px;">
+        <!-- Left: Recent Announcements -->
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">Recent Announcements</h3>
+            <a href="notifications.html" style="font-size: 0.85rem; font-weight: 700; color: var(--primary);">View All →</a>
+          </div>
+          <div id="dash-recent-notifs">
+            <div style="text-align: center; padding: 20px; color: var(--text-light);">Loading announcements...</div>
+          </div>
+        </div>
+
+        <!-- Right: Weather Preview Widget -->
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);">Agro-Weather Preview</h3>
+            <span class="badge badge-blue">Mandya District</span>
+          </div>
+
+          <div style="background: linear-gradient(135deg, var(--secondary-50) 0%, #ffffff 100%); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 2.8rem; font-weight: 800; color: var(--secondary-dark); line-height: 1;">28°C</div>
+            <div style="font-weight: 600; color: var(--text-main); margin-top: 4px;">Partly Cloudy with Gentle Breeze</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              💧 Humidity: 68% | 💨 Wind: 12 km/h
+            </div>
+          </div>
+
+          <div style="background-color: var(--primary-50); border: 1px solid var(--primary-light); border-radius: 8px; padding: 12px; font-size: 0.85rem; color: var(--primary-dark); margin-top: auto;">
+            🌱 <strong>Advisory:</strong> Favorable conditions for weeding and fertilizer application. Monitor evening showers.
+          </div>
+
+          <a href="weather.html" class="btn btn-outline-primary btn-sm" style="margin-top: 16px; width: 100%; text-align: center;">
+            Open 5-Day Detailed Forecast
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Require login
+      requireAuthPage();
+
+      const user = getCurrentUser();
+      if (user) {
+        document.getElementById('dash-greeting').textContent = `Namaste, ${user.name}! 👋`;
+        document.getElementById('dash-user-name').textContent = user.name;
+        document.getElementById('dash-avatar').textContent = user.name.charAt(0).toUpperCase();
+        document.getElementById('dash-user-role').textContent = user.role === 'admin' ? 'District Administrator' : 'Rural Citizen';
+        document.getElementById('dash-district-sub').textContent = `District: ${user.district || 'Rural'} | Registered Citizen Profile`;
+
+        if (user.role === 'admin') {
+          const adminHeading = document.getElementById('admin-menu-heading');
+          const adminLink = document.getElementById('admin-menu-link');
+          if (adminHeading) adminHeading.style.display = 'block';
+          if (adminLink) adminLink.style.display = 'block';
+        }
+      }
+
+      // Load Recent Notifications for Dashboard
+      try {
+        const token = getAuthToken();
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+        const res = await fetch('/api/notifications', { headers });
+        const data = await res.json();
+
+        if (data.success) {
+          const notifs = data.data.slice(0, 3);
+          const container = document.getElementById('dash-recent-notifs');
+          const alertKpi = document.getElementById('kpi-alerts-count');
+          if (alertKpi) alertKpi.textContent = data.unreadCount;
+
+          if (notifs.length === 0) {
+            container.innerHTML = '<div style="color: var(--text-light); text-align: center; padding: 20px;">No new alerts.</div>';
+          } else {
+            container.innerHTML = notifs.map(n => `
+              <div style="padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: flex-start; gap: 12px;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; background-color: ${n.isRead ? '#cbd5e1' : 'var(--primary)'}; margin-top: 6px; flex-shrink: 0;"></div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <strong style="font-size: 0.95rem; color: var(--text-main);">${escapeHtml(n.title)}</strong>
+                    <span class="badge ${n.priority === 'Urgent' ? 'badge-red' : 'badge-green'}" style="font-size: 0.7rem;">${escapeHtml(n.category)}</span>
+                  </div>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">${escapeHtml(n.message.substring(0, 110))}...</p>
+                </div>
+              </div>
+            `).join('');
+          }
+        }
+      } catch (e) {
+        console.error('Failed to load dashboard notifications');
+      }
+
+      // Load Document Count KPI
+      try {
+        const token = getAuthToken();
+        const res = await fetch('/api/documents', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (data.success) {
+          const docKpi = document.getElementById('kpi-docs-count');
+          if (docKpi) docKpi.textContent = data.count;
+        }
+      } catch (e) {
+        // Ignore
+      }
+    });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

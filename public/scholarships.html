@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scholarships - GraminSeva Rural Platform</title>
+  <meta name="description" content="Explore verified scholarships for rural students, girl students, and higher education with application deadlines and grant amounts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Academic Demonstration Notice -->
+  <div class="demo-banner">
+    🎓 <strong>Demonstration Data:</strong> Realistic scholarship grants for rural, SC/ST/OBC, and girl students for academic project evaluation.
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        </div>
+        <div>
+          <span>GraminSeva</span>
+          <span class="brand-subtitle">Rural Digital Platform</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="schemes.html" class="nav-link">Govt Schemes</a></li>
+          <li><a href="scholarships.html" class="nav-link active">Scholarships</a></li>
+          <li><a href="agriculture.html" class="nav-link">Agriculture</a></li>
+          <li><a href="weather.html" class="nav-link">Weather</a></li>
+          <li><a href="documents.html" class="nav-link">Documents</a></li>
+          <li>
+            <a href="notifications.html" class="nav-link">
+              Notifications
+              <span class="sidebar-badge notif-badge-count" style="display: none;">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions" id="nav-auth-actions"></div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page-container">
+    <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+      <span class="section-badge" style="background-color: var(--secondary-light); color: var(--secondary-dark);">Student Financial Assistance</span>
+      <h1 class="section-title">Scholarships for Rural & Underprivileged Students</h1>
+      <p class="section-subtitle">
+        Find educational grants, tuition waivers, and merit support from school to university level.
+      </p>
+    </div>
+
+    <!-- Toolbar: Search & Category Filter Pills -->
+    <div class="toolbar-container">
+      <div class="search-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-light);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="scholarship-search" placeholder="Search by scholarship title, provider, or course...">
+      </div>
+
+      <div class="filter-pills">
+        <button class="pill-btn scholarship-filter-btn active" data-category="All">All Categories</button>
+        <button class="pill-btn scholarship-filter-btn" data-category="Pre-Matric">Class 9-10</button>
+        <button class="pill-btn scholarship-filter-btn" data-category="Post-Matric">Post-Matric</button>
+        <button class="pill-btn scholarship-filter-btn" data-category="Girls Education">👩 Girls Education</button>
+        <button class="pill-btn scholarship-filter-btn" data-category="Higher Education">🎓 Degree / Univ</button>
+        <button class="pill-btn scholarship-filter-btn" data-category="Merit-Based">⭐ Merit Based</button>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <span id="scholarship-count-badge" style="font-size: 0.9rem; font-weight: 700; color: var(--text-light);">Loading scholarships...</span>
+      <span style="font-size: 0.85rem; color: var(--text-light);">💡 Check application deadlines before submitting certificates</span>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-grid" id="scholarships-container">
+      <!-- Injected by scholarships.js -->
+    </div>
+  </main>
+
+  <!-- Scholarship Modal -->
+  <div class="modal-overlay" id="scholarship-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Scholarship Guidelines & Criteria</h3>
+        <button class="modal-close" onclick="closeScholarshipModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="scholarship-modal-body">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>GraminSeva Portal</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cloud-Based Rural Digital Service Platform for 5th Semester Mini Project.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Direct Navigation</h4>
+        <ul>
+          <li><a href="schemes.html">Government Schemes</a></li>
+          <li><a href="scholarships.html">Student Scholarships</a></li>
+          <li><a href="agriculture.html">Farming Articles</a></li>
+          <li><a href="weather.html">Weather Forecast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Demonstration</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          All information is clearly labelled sample data for educational demonstration.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/scholarships.js"></script>
+</body>
+</html>

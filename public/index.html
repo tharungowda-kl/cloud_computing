@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GraminSeva - Cloud-Based Rural Digital Service Platform</title>
+  <meta name="description" content="A comprehensive cloud-enabled platform providing rural citizens single-window access to government schemes, scholarships, farming tips, weather updates, and digital document storage.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Academic Demonstration Banner -->
+  <div class="demo-banner">
+    🌾 <strong>5th Semester Engineering Mini Project:</strong> Cloud-Based Rural Digital Service Platform | 
+    <span style="font-weight: 500;">Connected to Node.js & MongoDB REST Backend</span>
+  </div>
+
+  <!-- Primary Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" id="home-brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </div>
+        <div>
+          <span>GraminSeva</span>
+          <span class="brand-subtitle">Rural Digital Platform</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="schemes.html" class="nav-link">Govt Schemes</a></li>
+          <li><a href="scholarships.html" class="nav-link">Scholarships</a></li>
+          <li><a href="agriculture.html" class="nav-link">Agriculture</a></li>
+          <li><a href="weather.html" class="nav-link">Weather</a></li>
+          <li><a href="documents.html" class="nav-link">Documents</a></li>
+          <li>
+            <a href="notifications.html" class="nav-link">
+              Notifications
+              <span class="sidebar-badge notif-badge-count" style="display: none;">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions" id="nav-auth-actions">
+        <!-- Injected dynamically by app.js -->
+        <a href="login.html" class="btn btn-outline-primary btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div>
+        <div class="hero-tag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          Direct Citizen Empowerment Platform
+        </div>
+        <h1 class="hero-title">
+          Empowering Rural Communities Through <span>Cloud Digital Services</span>
+        </h1>
+        <p class="hero-desc">
+          Single-window access to essential government welfare schemes, education scholarships, scientific agricultural guidance, localized weather advisories, and document verification.
+        </p>
+        <div class="hero-actions">
+          <a href="schemes.html" class="btn btn-primary btn-lg" id="hero-btn-schemes">
+            Explore Government Schemes →
+          </a>
+          <a href="register.html" class="btn btn-secondary btn-lg" id="hero-btn-register">
+            Join as Citizen
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>25+</h3>
+            <p>Active Welfare Schemes</p>
+          </div>
+          <div class="stat-item">
+            <h3>₹5,00,000</h3>
+            <p>Max Medical Cover Under PM-JAY</p>
+          </div>
+          <div class="stat-item">
+            <h3>100% Free</h3>
+            <p>Direct Citizen Access</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="hero-card-preview">
+          <span class="preview-badge">Live System Feature Preview</span>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+            🌾 PM-Kisan Samman Nidhi
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+            Direct benefit transfer of ₹6,000 annually in three instalments for eligible farmer families.
+          </p>
+          <div style="background-color: var(--primary-50); border: 1px solid var(--primary-light); border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 0.85rem; color: var(--primary-dark);">
+            ✓ <strong>Eligibility:</strong> All cultivable landholding farmer households.<br>
+            ✓ <strong>Direct Benefit:</strong> Transferred straight to bank account via DBT.
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a href="schemes.html" class="btn btn-primary btn-sm" style="flex: 1;">Check Eligibility</a>
+            <a href="login.html" class="btn btn-outline btn-sm">Demo Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area: 6 Core Services -->
+  <main class="page-container">
+    <div class="section-header">
+      <span class="section-badge">All-In-One Rural Portal</span>
+      <h2 class="section-title">Six Key Citizen Services</h2>
+      <p class="section-subtitle">
+        Everything rural residents and student scholars need, thoughtfully organized in one high-performance digital hub.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <!-- 1. Government Schemes -->
+      <div class="service-card" id="card-service-schemes">
+        <div class="service-icon-wrapper icon-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        </div>
+        <h3 class="service-card-title">Government Schemes</h3>
+        <p class="service-card-desc">
+          Browse central & state welfare programs including PM-KISAN, Ayushman Bharat, PMAY Housing, and MGNREGA with clear eligibility criteria.
+        </p>
+        <div class="service-meta-tags">
+          <span class="meta-tag">Agriculture Subsidies</span>
+          <span class="meta-tag">Healthcare</span>
+          <span class="meta-tag">Housing Support</span>
+        </div>
+        <a href="schemes.html" class="btn btn-outline-primary btn-sm">Browse Schemes →</a>
+      </div>
+
+      <!-- 2. Scholarships -->
+      <div class="service-card" id="card-service-scholarships">
+        <div class="service-icon-wrapper icon-blue">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+        </div>
+        <h3 class="service-card-title">Student Scholarships</h3>
+        <p class="service-card-desc">
+          Discover Pre-Matric, Post-Matric, AICTE Pragati, and merit grants for rural school & college students with application links and deadlines.
+        </p>
+        <div class="service-meta-tags">
+          <span class="meta-tag">Pre-Matric</span>
+          <span class="meta-tag">Higher Education</span>
+          <span class="meta-tag">Girls Grants</span>
+        </div>
+        <a href="scholarships.html" class="btn btn-secondary btn-sm">Find Scholarships →</a>
+      </div>
+
+      <!-- 3. Agriculture Information -->
+      <div class="service-card" id="card-service-agriculture">
+        <div class="service-icon-wrapper icon-amber">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 20h10"></path><path d="M10 20c0-5 3-7 5-14"></path><path d="M4 15c4 0 7-3 7-7"></path></svg>
+        </div>
+        <h3 class="service-card-title">Agriculture Guidance</h3>
+        <p class="service-card-desc">
+          Scientific crop cultivation guides, modern drip irrigation methods, organic bio-fertilizer preparation, and integrated pest control manuals.
+        </p>
+        <div class="service-meta-tags">
+          <span class="meta-tag">Crop Management</span>
+          <span class="meta-tag">Drip Irrigation</span>
+          <span class="meta-tag">Organic Soil</span>
+        </div>
+        <a href="agriculture.html" class="btn btn-outline-primary btn-sm">Read Farming Guides →</a>
+      </div>
+
+      <!-- 4. Weather Updates -->
+      <div class="service-card" id="card-service-weather">
+        <div class="service-icon-wrapper icon-blue">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+        </div>
+        <h3 class="service-card-title">Weather & Agro-Advisory</h3>
+        <p class="service-card-desc">
+          Localized district temperature, humidity, wind velocity, rainfall forecasts, and tailored agricultural advice for sowing and harvesting.
+        </p>
+        <div class="service-meta-tags">
+          <span class="meta-tag">5-Day Forecast</span>
+          <span class="meta-tag">Farming Advisory</span>
+          <span class="meta-tag">Rain Probabilities</span>
+        </div>
+        <a href="weather.html" class="btn btn-secondary btn-sm">Check Local Weather →</a>
+      </div>
+
+      <!-- 5. Document Management -->
+      <div class="service-card" id="card-service-documents">
+        <div class="service-icon-wrapper icon-purple">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        </div>
+        <h3 class="service-card-title">Document Management</h3>
+        <p class="service-card-desc">
+          Upload and store verification proofs such as Aadhaar, Land RTC, Ration Card, and Income certificates with validation of file type and size.
+        </p>
+        <div class="service-meta-tags">
+          <span class="meta-tag">File Validation</span>
+          <span class="meta-tag">Local Storage</span>
+          <span class="meta-tag">Instant Verification</span>
+        </div>
+        <a href="documents.html" class="btn btn-outline-primary btn-sm">Manage Documents →</a>
+      </div>
+
+      <!-- 6. Notifications & Alerts -->
+      <div class="service-card" id="card-service-notifications">
+        <div class="service-icon-wrapper icon-green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </div>
+        <h3 class="service-card-title">Notifications & Alerts</h3>
+        <p class="service-card-desc">
+          Timely announcements concerning scheme disbursement dates, scholarship application deadlines, monsoon warnings, and subsidy quotas.
+        </p>
+        <div class="service-meta-tags">
+          <span class="meta-tag">Deadline Reminders</span>
+          <span class="meta-tag">Urgent Alerts</span>
+          <span class="meta-tag">Mark as Read</span>
+        </div>
+        <a href="notifications.html" class="btn btn-outline-primary btn-sm">View Announcements →</a>
+      </div>
+    </div>
+
+    <!-- Platform Benefits -->
+    <section class="benefits-section">
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <span class="section-badge">Platform Impact</span>
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
+          Why This Mini Project Matters
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Bridging the digital divide between rural communities and centralized cloud governance systems.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div style="font-size: 1.8rem;">🎯</div>
+          <h4>Zero Middlemen</h4>
+          <p>Direct access to official scheme guidelines, minimizing dependency on third-party brokers and unnecessary paperwork fees.</p>
+        </div>
+        <div class="benefit-card">
+          <div style="font-size: 1.8rem;">📱</div>
+          <h4>Mobile Responsive</h4>
+          <p>Optimized for budget smartphones and rural mobile networks with large touch targets and rapid load times.</p>
+        </div>
+        <div class="benefit-card">
+          <div style="font-size: 1.8rem;">🔒</div>
+          <h4>Role-Based Access</h4>
+          <p>Separate secure user dashboards for rural citizens and an administrative control panel for government officers.</p>
+        </div>
+        <div class="benefit-card">
+          <div style="font-size: 1.8rem;">☁️</div>
+          <h4>Cloud Architecture</h4>
+          <p>Built on Node.js, Express, and MongoDB, ready for scalable deployment to AWS, GCP, or Azure cloud infrastructure.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand-logo" style="margin-bottom: 12px;">
+          <div class="brand-icon" style="width: 32px; height: 32px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 18px; height: 18px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          </div>
+          <span style="font-size: 1.15rem;">GraminSeva</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+          Cloud-Based Rural Digital Service Platform. Developed as a 5th-Semester Engineering Mini Project using HTML, CSS, JavaScript, Node.js, Express, and MongoDB.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Core Services</h4>
+        <ul>
+          <li><a href="schemes.html">Government Welfare Schemes</a></li>
+          <li><a href="scholarships.html">Student Scholarships</a></li>
+          <li><a href="agriculture.html">Farming Information</a></li>
+          <li><a href="weather.html">Weather & Agro-Advisories</a></li>
+          <li><a href="documents.html">Document Locker</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Demonstration Access</h4>
+        <ul>
+          <li><a href="login.html">Citizen Demo Login</a></li>
+          <li><a href="login.html">Officer / Admin Login</a></li>
+          <li><a href="register.html">Create New Account</a></li>
+          <li><a href="admin.html">Administrator Control Room</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 GraminSeva Rural Digital Service Platform | 5th Semester Mini Project</p>
+      <p>Demonstration data for academic evaluation | Zero commercial distribution</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

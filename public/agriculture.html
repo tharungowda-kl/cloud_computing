@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agriculture Information & Farming Guidance - GraminSeva</title>
+  <meta name="description" content="Scientific farming guidance, drip irrigation techniques, organic fertilizers, soil health, and pest management for rural farmers.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Academic Demonstration Notice -->
+  <div class="demo-banner">
+    🌾 <strong>Demonstration Agriculture Advisory:</strong> Agronomy guidelines compiled for rural farming education and mini-project demonstration.
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        </div>
+        <div>
+          <span>GraminSeva</span>
+          <span class="brand-subtitle">Rural Digital Platform</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="schemes.html" class="nav-link">Govt Schemes</a></li>
+          <li><a href="scholarships.html" class="nav-link">Scholarships</a></li>
+          <li><a href="agriculture.html" class="nav-link active">Agriculture</a></li>
+          <li><a href="weather.html" class="nav-link">Weather</a></li>
+          <li><a href="documents.html" class="nav-link">Documents</a></li>
+          <li>
+            <a href="notifications.html" class="nav-link">
+              Notifications
+              <span class="sidebar-badge notif-badge-count" style="display: none;">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions" id="nav-auth-actions"></div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="page-container">
+    <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+      <span class="section-badge" style="background-color: var(--accent-amber-light); color: var(--accent-amber);">Krishi Vidnyan & Advisory</span>
+      <h1 class="section-title">Agriculture Guidance & Crop Cultivation</h1>
+      <p class="section-subtitle">
+        Scientific agronomy tips, water-saving irrigation methods, organic fertilizer recipes, and pest protection.
+      </p>
+    </div>
+
+    <!-- Toolbar: Search & Category Filter Pills -->
+    <div class="toolbar-container">
+      <div class="search-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-light);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="agri-search" placeholder="Search farming guides, crops, organic compost, pests...">
+      </div>
+
+      <div class="filter-pills">
+        <button class="pill-btn agri-filter-btn active" data-category="All">All Topics</button>
+        <button class="pill-btn agri-filter-btn" data-category="Crop Management">🌾 Crops</button>
+        <button class="pill-btn agri-filter-btn" data-category="Irrigation Methods">💧 Irrigation</button>
+        <button class="pill-btn agri-filter-btn" data-category="Soil Health & Fertilizer">🌱 Soil & Compost</button>
+        <button class="pill-btn agri-filter-btn" data-category="Pest & Disease Control">🐛 Pest Control</button>
+        <button class="pill-btn agri-filter-btn" data-category="Modern Tools & Subsidies">☀️ Solar & Tools</button>
+      </div>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="cards-grid" id="agri-container">
+      <!-- Injected by agriculture.js -->
+    </div>
+  </main>
+
+  <!-- Full Article Reader Modal -->
+  <div class="modal-overlay" id="agri-modal">
+    <div class="modal-content" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Farming Practical Handbook</h3>
+        <button class="modal-close" onclick="closeAgriModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="agri-modal-body">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>GraminSeva Portal</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cloud-Based Rural Digital Service Platform for 5th Semester Mini Project.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Direct Navigation</h4>
+        <ul>
+          <li><a href="schemes.html">Government Schemes</a></li>
+          <li><a href="scholarships.html">Student Scholarships</a></li>
+          <li><a href="agriculture.html">Farming Articles</a></li>
+          <li><a href="weather.html">Weather Forecast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Farming Notice</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          Recommendations should be cross-verified with local Raitha Seva Kendras / Krishi Vigyan Kendras (KVK).
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/agriculture.js"></script>
+</body>
+</html>

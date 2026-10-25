@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Document Locker - GraminSeva</title>
+  <meta name="description" content="Securely upload and manage citizen verification documents with support for Amazon S3 cloud storage, presigned URLs, and local server storage fallback.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Academic Demonstration Notice -->
+  <div class="demo-banner">
+    ☁️ <strong>Cloud Storage Integration:</strong> Integrated with <strong>Amazon Web Services (AWS S3)</strong> using AWS SDK v3 with short-lived presigned URLs and automatic local storage fallback.
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        </div>
+        <div>
+          <span>GraminSeva</span>
+          <span class="brand-subtitle">Rural Digital Platform</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="schemes.html" class="nav-link">Govt Schemes</a></li>
+          <li><a href="scholarships.html" class="nav-link">Scholarships</a></li>
+          <li><a href="agriculture.html" class="nav-link">Agriculture</a></li>
+          <li><a href="weather.html" class="nav-link">Weather</a></li>
+          <li><a href="documents.html" class="nav-link active">Documents</a></li>
+          <li>
+            <a href="notifications.html" class="nav-link">
+              Notifications
+              <span class="sidebar-badge notif-badge-count" style="display: none;">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions" id="nav-auth-actions"></div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page-container">
+    <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+      <span class="section-badge" style="background-color: var(--accent-purple-light); color: var(--accent-purple);">Cloud Document Locker</span>
+      <h1 class="section-title">Upload & Verify Citizen Documents</h1>
+      <p class="section-subtitle">
+        Maintain digital copies of identity and land proofs with support for Amazon S3 private cloud storage and short-lived presigned download URLs.
+      </p>
+    </div>
+
+    <!-- Active Cloud Storage Provider Status Banner -->
+    <div id="storage-status-banner" style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: var(--shadow-sm);">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div id="storage-mode-icon" style="width: 36px; height: 36px; border-radius: 8px; background-color: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+          ☁️
+        </div>
+        <div>
+          <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);" id="storage-mode-title">
+            Storage Engine: Loading status...
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);" id="storage-mode-details">
+            Checking backend storage provider configuration...
+          </div>
+        </div>
+      </div>
+      <div id="storage-mode-badge-wrap">
+        <span class="badge badge-green" id="storage-mode-badge">Checking...</span>
+      </div>
+    </div>
+
+    <!-- Upload Card -->
+    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 36px; box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">
+        Upload New Document
+      </h3>
+
+      <form id="document-upload-form">
+        <!-- Interactive Drag & Drop Area -->
+        <div class="dropzone-container" id="document-dropzone">
+          <input type="file" id="document-file-input" style="display: none;" accept=".pdf,.jpg,.jpeg,.png,.webp">
+          <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">
+            Click to Browse or Drag Document Here
+          </h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Supported Formats: <strong>PDF, JPG, JPEG, PNG, WEBP</strong> (Max size: <strong>5 MB</strong>)
+          </p>
+
+          <!-- Selected File Pill Indicator -->
+          <div id="file-preview-pill" class="file-preview-pill" style="display: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="file-preview-name">filename.pdf</span>
+            <span id="file-preview-size" style="opacity: 0.8;">(120 KB)</span>
+          </div>
+        </div>
+
+        <!-- Inline Status & Error Message Box -->
+        <div id="upload-error-alert" style="display: none; background-color: var(--accent-red-light); border: 1px solid #fca5a5; color: #991b1b; padding: 12px 16px; border-radius: var(--radius-md); font-size: 0.9rem; margin-bottom: 20px;">
+          <strong id="upload-error-title">Upload Error:</strong> <span id="upload-error-text">Message details</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: end;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="doc-category-select">Document Category / Type *</label>
+            <select id="doc-category-select" class="form-control form-select">
+              <option value="Aadhaar Card">Aadhaar Card (Identity Proof)</option>
+              <option value="Land Record / RTC">Land Record / RTC / Pahani (Farmer Proof)</option>
+              <option value="Ration Card">Ration Card (BPL / APL Proof)</option>
+              <option value="Income Certificate">Income Certificate (Scholarship Proof)</option>
+              <option value="Caste Certificate">Caste Certificate</option>
+              <option value="Bank Passbook">Bank Passbook (DBT Account Proof)</option>
+              <option value="Other">Other Certificate</option>
+            </select>
+          </div>
+
+          <div>
+            <button type="submit" id="upload-submit-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+              Upload Document
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Uploaded Documents Table Section -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">
+        My Uploaded Documents
+      </h3>
+      <span style="font-size: 0.85rem; color: var(--text-light);" id="table-storage-note">
+        📁 Stored in active storage provider
+      </span>
+    </div>
+
+    <div class="table-responsive">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Document Name</th>
+            <th>Category</th>
+            <th>Storage Location</th>
+            <th>Format</th>
+            <th>File Size</th>
+            <th>Upload Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="documents-table-body">
+          <!-- Injected dynamically by documents.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty State -->
+    <div id="documents-empty-state" style="display: none; text-align: center; padding: 50px 20px; background: white; border: 1px dashed var(--border-color); border-radius: var(--radius-lg); margin-top: 16px;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--text-light); margin-bottom: 12px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+      <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 6px;">No Documents Uploaded Yet</h4>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Select a file above to upload your Aadhaar, Land RTC, or Ration Card.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>GraminSeva Portal</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cloud-Based Rural Digital Service Platform with Amazon S3 cloud storage for 5th Semester Mini Project.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Direct Navigation</h4>
+        <ul>
+          <li><a href="schemes.html">Government Schemes</a></li>
+          <li><a href="scholarships.html">Student Scholarships</a></li>
+          <li><a href="agriculture.html">Farming Articles</a></li>
+          <li><a href="weather.html">Weather Forecast</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>AWS S3 Architecture</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          Documents in Amazon S3 are kept private. Download links use secure, temporary presigned URLs expiring in 15 minutes.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/documents.js"></script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Control Center - GraminSeva</title>
+  <meta name="description" content="Administrative console for managing government welfare schemes, scholarships, farming articles, and citizen broadcasts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Academic Demonstration Notice -->
+  <div class="demo-banner">
+    🛡️ <strong>Admin Console:</strong> Protected with JWT role authentication (<code>role: 'admin'</code>). All modifications persist in the database.
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <div>
+          <span>GraminSeva</span>
+          <span class="brand-subtitle">Administrator Control Panel</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Citizen View</a>
+        <button onclick="logout()" class="btn btn-outline btn-sm" style="color: var(--accent-red);">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+      <div>
+        <span class="badge badge-purple" style="margin-bottom: 6px;">Privileged Access: Officer</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-main);">Platform Administration Console</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Manage schemes, scholarships, farming articles, and citizen broadcasts in real-time.</p>
+      </div>
+      <div>
+        <span class="badge badge-green" id="stat-db-mode">Database Mode: Loading...</span>
+      </div>
+    </div>
+
+    <!-- Overview KPI Cards -->
+    <div class="stats-overview-grid">
+      <div class="stat-widget">
+        <div class="stat-widget-icon icon-green">🏛️</div>
+        <div>
+          <div class="stat-widget-num" id="stat-schemes-count">0</div>
+          <div class="stat-widget-label">Govt Schemes</div>
+        </div>
+      </div>
+      <div class="stat-widget">
+        <div class="stat-widget-icon icon-blue">🎓</div>
+        <div>
+          <div class="stat-widget-num" id="stat-scholarships-count">0</div>
+          <div class="stat-widget-label">Scholarships</div>
+        </div>
+      </div>
+      <div class="stat-widget">
+        <div class="stat-widget-icon icon-amber">🌾</div>
+        <div>
+          <div class="stat-widget-num" id="stat-agri-count">0</div>
+          <div class="stat-widget-label">Agri Guides</div>
+        </div>
+      </div>
+      <div class="stat-widget">
+        <div class="stat-widget-icon icon-purple">👥</div>
+        <div>
+          <div class="stat-widget-num" id="stat-users-count">0</div>
+          <div class="stat-widget-label">Registered Citizens</div>
+        </div>
+      </div>
+      <div class="stat-widget">
+        <div class="stat-widget-icon icon-blue">📁</div>
+        <div>
+          <div class="stat-widget-num" id="stat-docs-count">0</div>
+          <div class="stat-widget-label">Citizen Documents</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Administrative Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" data-target="tab-schemes">🏛️ Government Schemes</button>
+      <button class="admin-tab-btn" data-target="tab-scholarships">🎓 Scholarships</button>
+      <button class="admin-tab-btn" data-target="tab-agriculture">🌾 Agriculture Guides</button>
+      <button class="admin-tab-btn" data-target="tab-broadcast">📢 Broadcast Announcements</button>
+      <button class="admin-tab-btn" data-target="tab-users">👤 Citizen Registry</button>
+    </div>
+
+    <!-- TAB 1: SCHEMES MANAGEMENT -->
+    <div class="admin-tab-pane active" id="tab-schemes">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">Government Welfare Schemes</h3>
+        <button onclick="openAddSchemeModal()" class="btn btn-primary btn-sm">+ Add New Scheme</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Scheme Title & Dept</th>
+              <th>Category</th>
+              <th>Direct Benefits</th>
+              <th>Cut-off / Deadline</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-schemes-tbody">
+            <!-- Injected by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: SCHOLARSHIPS MANAGEMENT -->
+    <div class="admin-tab-pane" id="tab-scholarships">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">Scholarship Programs</h3>
+        <button onclick="openAddScholarshipModal()" class="btn btn-secondary btn-sm">+ Add New Scholarship</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Scholarship Title & Provider</th>
+              <th>Category</th>
+              <th>Grant Amount</th>
+              <th>Deadline</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-scholarships-tbody">
+            <!-- Injected by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 3: AGRICULTURE MANAGEMENT -->
+    <div class="admin-tab-pane" id="tab-agriculture">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">Agriculture Articles & Advisories</h3>
+        <button onclick="openAddAgriModal()" class="btn btn-primary btn-sm">+ Add Agriculture Guide</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Article Title</th>
+              <th>Topic Category</th>
+              <th>Target Crops</th>
+              <th>Season</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-agri-tbody">
+            <!-- Injected by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 4: BROADCAST ANNOUNCEMENTS -->
+    <div class="admin-tab-pane" id="tab-broadcast">
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; max-width: 650px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 16px;">
+          Broadcast New Announcement to Rural Citizens
+        </h3>
+
+        <form id="admin-broadcast-form">
+          <div class="form-group">
+            <label class="form-label" for="broadcast-title">Announcement Title *</label>
+            <input type="text" id="broadcast-title" class="form-control" placeholder="e.g., Heavy Rainfall Alert for Mandya Taluk" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label" for="broadcast-category">Category *</label>
+              <select id="broadcast-category" class="form-control form-select">
+                <option value="Schemes">Schemes & Subsidies</option>
+                <option value="Scholarships">Scholarships</option>
+                <option value="Agriculture">Agriculture & Farming</option>
+                <option value="Weather">Weather Advisory</option>
+                <option value="General">General Administrative</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="broadcast-priority">Priority Level</label>
+              <select id="broadcast-priority" class="form-control form-select">
+                <option value="Normal">Normal</option>
+                <option value="High">High Priority</option>
+                <option value="Urgent">Urgent Alert</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="broadcast-message">Announcement Message Body *</label>
+            <textarea id="broadcast-message" class="form-control" rows="4" placeholder="Detail the update, important steps for citizens, and deadlines..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            Publish & Broadcast Announcement 📢
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 5: CITIZEN REGISTRY -->
+    <div class="admin-tab-pane" id="tab-users">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">Registered Citizen Profiles</h3>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>District</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-users-tbody">
+            <!-- Injected by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL: ADD / EDIT SCHEME -->
+  <div class="modal-overlay" id="admin-scheme-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="scheme-modal-form-title">Add Government Scheme</h3>
+        <button class="modal-close" onclick="closeAdminSchemeModal()">&times;</button>
+      </div>
+      <form id="admin-scheme-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="scheme-form-name">Scheme Name *</label>
+            <input type="text" id="scheme-form-name" class="form-control" required placeholder="e.g., PM-Kisan Samman Nidhi">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="scheme-form-dept">Ministry / Department *</label>
+              <input type="text" id="scheme-form-dept" class="form-control" required placeholder="e.g., Ministry of Agriculture">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="scheme-form-cat">Category *</label>
+              <select id="scheme-form-cat" class="form-control form-select">
+                <option value="Agriculture">Agriculture</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Housing">Housing</option>
+                <option value="Employment">Employment</option>
+                <option value="Social Welfare">Social Welfare</option>
+                <option value="Financial Support">Financial Support</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="scheme-form-desc">Full Description *</label>
+            <textarea id="scheme-form-desc" class="form-control" rows="3" required placeholder="Detailed scheme explanation..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="scheme-form-bene">Direct Benefits *</label>
+            <input type="text" id="scheme-form-bene" class="form-control" required placeholder="e.g., ₹6,000 per year via Direct Benefit Transfer">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="scheme-form-elig">Eligibility Criteria *</label>
+            <textarea id="scheme-form-elig" class="form-control" rows="2" required placeholder="Who is eligible?"></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="scheme-form-dead">Application Cut-off / Deadline</label>
+              <input type="text" id="scheme-form-dead" class="form-control" placeholder="e.g., Open round the year">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="scheme-form-link">Official Portal URL</label>
+              <input type="url" id="scheme-form-link" class="form-control" placeholder="https://pmkisan.gov.in">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeAdminSchemeModal()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Scheme</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT SCHOLARSHIP -->
+  <div class="modal-overlay" id="admin-scholarship-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="scholarship-modal-form-title">Add Scholarship</h3>
+        <button class="modal-close" onclick="closeAdminScholarshipModal()">&times;</button>
+      </div>
+      <form id="admin-scholarship-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="schol-form-name">Scholarship Name *</label>
+            <input type="text" id="schol-form-name" class="form-control" required placeholder="e.g., National Means-cum-Merit Scholarship">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="schol-form-provider">Awarding Body / Ministry *</label>
+              <input type="text" id="schol-form-provider" class="form-control" required placeholder="e.g., Dept of School Education">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="schol-form-cat">Category *</label>
+              <select id="schol-form-cat" class="form-control form-select">
+                <option value="Pre-Matric">Pre-Matric</option>
+                <option value="Post-Matric">Post-Matric</option>
+                <option value="Higher Education">Higher Education</option>
+                <option value="Girls Education">Girls Education</option>
+                <option value="Merit-Based">Merit-Based</option>
+                <option value="Technical / Vocational">Technical / Vocational</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="schol-form-amount">Grant / Aid Amount *</label>
+              <input type="text" id="schol-form-amount" class="form-control" required placeholder="e.g., ₹12,000 per year">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="schol-form-dead">Submission Deadline *</label>
+              <input type="text" id="schol-form-dead" class="form-control" required placeholder="e.g., 30 November 2026">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="schol-form-elig">Eligibility Criteria *</label>
+            <textarea id="schol-form-elig" class="form-control" rows="2" required placeholder="Income limits, passing percentage, eligible classes..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="schol-form-link">Application Portal URL</label>
+            <input type="url" id="schol-form-link" class="form-control" placeholder="https://scholarships.gov.in">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="schol-form-desc">Brief Overview</label>
+            <textarea id="schol-form-desc" class="form-control" rows="2" placeholder="Summary of who this aids..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeAdminScholarshipModal()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-secondary btn-sm">Save Scholarship</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT AGRICULTURE -->
+  <div class="modal-overlay" id="admin-agri-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="agri-modal-form-title">Add Agriculture Guide</h3>
+        <button class="modal-close" onclick="closeAdminAgriModal()">&times;</button>
+      </div>
+      <form id="admin-agri-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="agri-form-title">Guide Title *</label>
+            <input type="text" id="agri-form-title" class="form-control" required placeholder="e.g., Drip Irrigation Maintenance">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="agri-form-cat">Category *</label>
+              <select id="agri-form-cat" class="form-control form-select">
+                <option value="Crop Management">Crop Management</option>
+                <option value="Irrigation Methods">Irrigation Methods</option>
+                <option value="Soil Health & Fertilizer">Soil Health & Fertilizer</option>
+                <option value="Pest & Disease Control">Pest & Disease Control</option>
+                <option value="Modern Tools & Subsidies">Modern Tools & Subsidies</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="agri-form-crop">Target Crops</label>
+              <input type="text" id="agri-form-crop" class="form-control" placeholder="e.g., Paddy, Millets, Vegetables">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="agri-form-season">Season</label>
+            <input type="text" id="agri-form-season" class="form-control" placeholder="e.g., Kharif / Rabi / All Seasons">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="agri-form-summary">Short Summary *</label>
+            <textarea id="agri-form-summary" class="form-control" rows="2" required placeholder="Quick preview summary..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="agri-form-content">Full Article Content *</label>
+            <textarea id="agri-form-content" class="form-control" rows="4" required placeholder="Detailed methodology and step by step guidance..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="agri-form-tips">Actionable Tips (One per line)</label>
+            <textarea id="agri-form-tips" class="form-control" rows="3" placeholder="Tip 1&#10;Tip 2&#10;Tip 3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeAdminAgriModal()" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Publish Guide</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
